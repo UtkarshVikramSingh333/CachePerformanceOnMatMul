@@ -50,16 +50,16 @@ vector<vector<int>> scatterMatrix(vector<vector<int>> targetMatrix) {
 
     vector<int> indexList(totalEntries), valueList(totalEntries);
 
-    // Initialize random number generator
+   
     srand(static_cast<unsigned int>(time(0)));
 
-    // Generate random indices and corresponding values
+    
     for (int i = 0; i < totalEntries; ++i) {
         indexList[i] = rand() % (matrixSize * matrixSize);
         valueList[i] = rand();
     }
 
-    // Scatter the values into the target matrix
+    
     for (int i = 0; i < totalEntries; ++i) {
         int row = indexList[i] / matrixSize;
         int col = indexList[i] % matrixSize;
@@ -93,7 +93,7 @@ int main (int argc, char* argv[]) {
 	}
 	Result result = read (filename);
     parsec_roi_begin();
-	vector< vector<int> > C = scatter(result.A);
+	vector< vector<int> > C = scatterMatrix(result.A);
     parsec_roi_end();
 	//printMatrix(C);
 	return 0;
