@@ -44,20 +44,29 @@ Result read(string filename) {
 	return ab;
 }
 
-vector< vector<int> > scatter(vector< vector<int> > A) {
-	int n = A.size();
-	int number_of_indices = 1000;
-	vector<int> indices(number_of_indices), data(number_of_indices);
-	for(int i = 0; i < number_of_indices ; i++){
-		indices[i] = rand() % (n*n);
-		data[i] = rand();
-	}
-	for(int i = 0 ; i < number_of_indices ; i++){
-		int row = indices[i]/n;
-		int col = indices[i]%n;
-		A[row][col] = data[i];
-	}
-	return A;
+vector<vector<int>> scatterMatrix(vector<vector<int>> targetMatrix) {
+    int matrixSize = targetMatrix.size(); // Dimension of the square matrix
+    const int totalEntries = 1000;       // Number of entries to scatter
+
+    vector<int> indexList(totalEntries), valueList(totalEntries);
+
+    // Initialize random number generator
+    srand(static_cast<unsigned int>(time(0)));
+
+    // Generate random indices and corresponding values
+    for (int i = 0; i < totalEntries; ++i) {
+        indexList[i] = rand() % (matrixSize * matrixSize);
+        valueList[i] = rand();
+    }
+
+    // Scatter the values into the target matrix
+    for (int i = 0; i < totalEntries; ++i) {
+        int row = indexList[i] / matrixSize;
+        int col = indexList[i] % matrixSize;
+        targetMatrix[row][col] = valueList[i];
+    }
+
+    return targetMatrix;
 }
 
 void printMatrix(vector< vector<int> > matrix) {
